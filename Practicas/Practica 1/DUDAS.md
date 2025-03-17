@@ -1,2 +1,0 @@
-DUDAS  
-Ejercicio x -> .
