@@ -1,6 +1,6 @@
 -- Ejercicio 2 | Definir las siguientes funciones:
 
--- I. valorAbsoluto, que dado un num devuelve su valor absoluto.
+-- I. valorAbsoluto, que dado un número devuelve su valor absoluto.
 valorAbsoluto :: Float -> Float
 valorAbsoluto x = if x<0 then -x else x  
 
@@ -13,7 +13,7 @@ factorial :: Int -> Int
 factorial 0 = 1
 factorial n = n*factorial(n-1)
 
--- IV. cantDivisoresPrimos, dado un Int>0 devuelve la cantidad de divisores primos.
+-- IV. cantDivisoresPrimos, dado un Int positivo devuelve la cantidad de divisores primos.
 cantDivisores :: Int -> Int
 cantDivisores 1 = 1
 cantDivisores n = length (filter (\x -> mod n x == 0) [1..n])
