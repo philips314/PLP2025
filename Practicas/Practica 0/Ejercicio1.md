@@ -16,23 +16,23 @@ Devuelve la lista sin su primer elemento.
 `init :: [a] -> [a]`   
 Devuelve el primer elemento de una lista, y retorna un error al recibir una lista vacía.  
 ### V. last  
-`last :: [a] -> a`  
+`last :: [a] -> a`   
 Devuelve el último elemento de una lista, y retorna un error al recibir una lista vacía.  
 ### VI. take  
-`take :: Int -> [a] -> [a]` 
+`take :: Int -> [a] -> [a]`   
 Crea una lista, el primer `Int` determina cuantos elementos debe tomar del siguiente argumento `[a]`, de izquierda a derecha.  
 ### VII. drop  
-`drop :: Int -> [a] -> [a]` 
+`drop :: Int -> [a] -> [a]`   
 Toma una lista y la devuelve sin los primeros `Int` elementos.    
 ### VIII. (++)  
-`(++) :: [a] -> [a] -> [a]` 
-s.  
+`(++) :: [a] -> [a] -> [a]`   
+Toma dos listas y las concatena en una sola de izquierda a derecha.  
 ### IX.  concat  
 `concat :: Foldable t => t [a] -> [a]`  
-s.  
+Toma una lista de listas y las concatena en una sola lista de izquierda a derecha.  
 ### X. reverse  
 `reverse :: [a] -> [a]`  
-s.  
+Toma una lista e invierte el orden de sus elementos.  
 ### XI. elem  
 `elem :: (Foldable t, Eq a) => a -> t a -> Bool`  
-s.  
+Recive un elemento y una lista, devuelve un `Bool` que indica si el elemento esta presente en la lista.  
