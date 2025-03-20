@@ -11,7 +11,6 @@ negacionAB :: AB Bool -> AB Bool
 negacionAB Nil = Nil
 negacionAB (Bin izq valor der) = Bin (negacionAB izq) (not valor) (negacionAB der)
 
-
 --III. productoAB.
 productoAB :: AB Int -> Int
 productoAB Nil = 1
