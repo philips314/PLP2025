@@ -20,7 +20,7 @@ predecesor :: Float -> Float
 evaluarEnCero :: (Float -> a) -> a
 # (.) :: (b -> c) -> (a -> b) -> a -> c
 # f :: (a -> b)
-# b = a para que pueda tipar con (.)
+            # b = a para que pueda tipar con (.)
 dosVeces :: (a -> a) -> a -> a
 # map :: (a1 -> b1) -> [a1] -> [b1]
 # flip :: (a -> b -> c) -> b -> a -> c
