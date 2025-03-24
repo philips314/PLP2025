@@ -24,7 +24,7 @@ evaluarEnCero :: (Float -> a) -> a
 dosVeces :: (a -> a) -> a -> a
 # map :: (a1 -> b1) -> [a1] -> [b1]
 # flip :: (a -> b -> c) -> b -> a -> c
-# a1 :: (a -> b -> c) y b1 :: b -> a -> c
+            # a1 :: (a -> b -> c) ; b1 :: b -> a -> c
 flipAll :: [a -> b -> c] -> [b -> a -> c]
 # flip1 :: (x -> y -> z) -> y -> x -> z ; flip2 :: (a -> b -> c) -> b -> a -> c
 # x -> y -> z := (a -> b -> c) -> b -> a -> c
@@ -36,5 +36,10 @@ flipRaro :: b -> (a -> b -> c) -> a -> c
 ```
 ### II. Indicar cuáles de las funciones anteriores no están currificadas. Para cada una de ellas, definir la función currificada correspondiente. Recordar dar el tipo de la función.   
 ```
-asd
+max2Curry :: Float -> Float -> Float
+max2Curry x y = max2 (x,y)
+
+normaVectorialCurry :: Float -> Float -> Float
+normaVectorialCurry x y = normaVectorial (x, y)
+
 ```
