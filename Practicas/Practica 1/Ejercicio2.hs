@@ -8,7 +8,7 @@ uncurry :: (a -> b -> c) -> ((a,b) -> c)
 uncurry = \f -> \(x, y) -> f x y
 
 
--- III. curryN, dada una función de un número arbitrario de argumentos devuelva su versión currificada.
+-- III. curryN, que dada una función de un número arbitrario de argumentos devuelva su versión currificada.
 -- No puede hacerse en Haskell porque no hay manera 'genérica' para cualquier cantidad de argumentos, ya que Haskell no tiene introspección sobre la cantidad de argumentos de una función.
 -- curryN :: ((a1, a2,..., an) -> b) -> a1 -> a2 -> ... -> an -> b
 -- curryN f a1 a2 ... an = f (a1, a2,..., an)
