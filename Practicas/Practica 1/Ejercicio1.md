@@ -22,10 +22,17 @@ evaluarEnCero :: (Float -> a) -> a
 # f :: (a -> b)
 # b = a para que pueda tipar con (.)
 dosVeces :: (a -> a) -> a -> a
-# map :: (a -> b) -> [a] -> [b]
+# map :: (a1 -> b1) -> [a1] -> [b1]
 # flip :: (a -> b -> c) -> b -> a -> c
-flipAll ::
-flipRaro ::
+# a1 :: (a -> b -> c) y b1 :: b -> a -> c
+flipAll :: [a -> b -> c] -> [b -> a -> c]
+# flip1 :: (x -> y -> z) -> y -> x -> z ; flip2 :: (a -> b -> c) -> b -> a -> c
+# x -> y -> z := (a -> b -> c) -> b -> a -> c
+            # x :: (a -> b -> c)
+            # y :: b
+            # z :: a -> c
+            # flipRaro :: y -> x -> z
+flipRaro :: b -> (a -> b -> c) -> a -> c
 ```
 ### II. Indicar cuáles de las funciones anteriores no están currificadas. Para cada una de ellas, definir la función currificada correspondiente. Recordar dar el tipo de la función.   
 ```
