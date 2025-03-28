@@ -1,4 +1,4 @@
-# Practica 0 / Ejercicio 1 
+# Práctica 0 / Ejercicio 1 
 ## Dar el tipo y describir el comportamiento de las siguientes funciones del módulo Prelude de Haskell:  
 ### I. null  
 `null :: Foldable t => t a -> Bool`  
