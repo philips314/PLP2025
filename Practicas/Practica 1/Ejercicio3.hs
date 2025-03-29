@@ -33,11 +33,11 @@ mejorSegunFoldr1 p = foldr1 (\x rec -> if p x rec then x else rec)
 --      desde la cabeza hasta la posición actual
 
 -- foldl :: (b -> a -> b) -> b -> [a] -> b
--- foldl :: (recCola -> head -> recConCabeza) -> casoBase -> lista -> res
--- Es como foldr pero resuelve de izquierda a derecha, comenzando desde el primer elemento.
+-- foldl :: (acCola -> head -> acConHead) -> acInicial -> lista -> res
+-- Se comporta como foldr pero resuelve de izquierda a derecha, comenzando desde el primer elemento.
 
 sumasParciales :: Num a => [a] -> [a]
-sumasParciales = foldl (\rec x -> rec ++ (if null rec then [x] else [x + last rec])) []
+sumasParciales = foldl (\ac x -> ac ++ (if null ac then [x] else [x + last ac])) []
 
 -- IV. sumaAlt, que realiza la suma alternada de los elementos de una lista.
 --     El primer elemento, menos el segundo, más el tercero, ...
