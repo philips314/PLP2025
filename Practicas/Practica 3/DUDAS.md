@@ -1,0 +1,2 @@
+Dudas.  
+Ejercicio x -> i.  
