@@ -281,9 +281,59 @@ Donde:
 No escribo el "∀x::a." pero saber que esta presente.
 
 Por un lado:
+ponerAlFinal x (y:xs) =     {P0}
+foldr (:) (x:[]) (y:xs) =     {FR1; :}
+(:) y (foldr (:) ([x]) xs) =     {:}
+y : (foldr (:) ([x]) xs)
+
+
+Por el otro:
+(y:xs) ++ (x:[]) =     {++; :}
+foldr (:) ([x]) (y:xs) =     {FR1}
+(:) y (foldr (:) [x] xs) =     {:}
+y : (foldr (:) [x] xs)
+
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
+### VII. `reverse = foldr (\x rec -> rec ++ (x:[])) []`  
+Por extensionalidad funcional, basta ver que: `∀ys::[a]. P(ys), donde P(ys): reverse ys = foldr (\x rec -> rec ++ (x:[])) [] ys`  
+Por induccion estructural sobre ys tenemos dos casos: Base e inductivo...   
+**Caso base:** `P([])`  
+```
+Por un lado:
+reverse [] =     {R0}
+foldl (flip (:)) [] []     = {FL0}
+[]
+
+Por el otro:
+foldr (\x rec -> rec ++ (x:[])) [] [] =     {FR0}
+[]
+
+P([]) vale.
+```
+**Caso inductivo:** `∀ys::[a]. ∀y::a. P(ys) {HI} => P(y:ys) {TI}`  
+Donde:  
+* **P(ys)**: `reverse ys = foldr (\x rec -> rec ++ (x:[])) [] ys` {HI}  
+* **P(y:ys)**: `reverse (y:ys) = foldr (\x rec -> rec ++ (x:[])) [] (y:ys)` {TI}
+```
+Por un lado:
 
 Por el otro:
 
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
-``` 
+```  
+Tengo que definir un LEMA.  
+P(xs): `∀xs::[a]. ∀y::a. foldl (flip (:)) [y] xs = reverse xs ++ [y]`  
+**Caso base:** `P([])`  
+```
+asd
+```
+**Caso inductivo:** `asd`  
+Donde:  
+* **P(ys)**: `asd` {HI}  
+* **P(y:ys)**: `asd` {TI}
+```
+asd
+```
