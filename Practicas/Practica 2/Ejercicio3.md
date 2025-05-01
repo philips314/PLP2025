@@ -25,7 +25,7 @@
 {FLIP}: flip f x y = f y x
 ```
 ### I. `∀xs::[a]. length (duplicar xs) = 2 * length xs`  
-Por induccion estructural tenemos dos casos: Base e inductivo...  
+Por extencionalidad funcional e induccion estructural tenemos dos casos: Base e inductivo...  
 Predicado unario: `P(xs) = length (duplicar xs) = 2 * length xs`  
 **Caso base:** `P([])`  
 ```
@@ -57,5 +57,112 @@ Por el otro:
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
 ### II. `∀xs::[a]. ∀ys::[a]. length (append xs ys) = length xs + length ys`  
+Por extensionalidad funcional e induccion estructural en xs tenemos dos casos: Base e inductivo...  
+Predicado unario: `P(xs) = ∀ys::[a]. length (append xs ys) = length xs + length ys`  
+**Caso base:** `P([])`  
 ```
+No escribo el "∀ys::[a]" pero saber que esta presente.
+
+Por un lado:
+length (append [] ys) =     {A0} 
+length ys
+
+Por el otro:
+length [] + length ys =     {L0}
+0 + length ys =     {INT}
+length ys
+
+P([]) vale.
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+* **P(xs)**: `∀ys::[a]. length (append xs ys) = length xs + length ys` {HI}  
+* **P(x:xs)**: `∀ys::[a]. length (append (x:xs) ys) = length (x:xs) + length ys` {TI}
+```
+No escribo el "∀ys::[a]" pero saber que esta presente.
+
+Por un lado:
+length (append (x:xs) ys) =     {A1}
+length (x : append xs ys) =     {L1}
+1 + length (append xs ys) =     {HI}
+1 + length xs + length ys
+
+
+Por el otro:
+length (x:xs) + length ys = {L1}
+1 + length xs + length ys
+
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
+### III. `∀xs::[a]. ∀x::a. append [x] xs = x:xs`  
+Por extensionalidad funcional e induccion estructural en xs tenemos dos casos: Base e inductivo...  
+Predicado unario: `∀x::a. P(xs) = append [x] xs = x:xs`  
+**Caso base:** `P([])`  
+```
+No escribo el "∀x::a." pero saber que esta presente.
+
+Por un lado:
+append [x] [] =     {A1}
+x : append [] [] =      {A0}
+x : [] =     {:}
+[x]
+
+Por el otro:
+x:[] =     {:}
+[x]
+
+P([]) vale.
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+* **P(xs)**: `∀x::a. append [x] xs = x:xs` {HI}  
+* **P(y:xs)**: `∀x::a. append [x] (y:xs) = x : (y:xs)` {TI}
+```
+No escribo el "∀x::a." pero saber que esta presente.
+
+Por un lado:
+append [x] (y:xs) =     {A1}
+x : append [] (y:xs) =     {A0}
+x : (y:xs) =     {:}
+(x:y:xs)
+
+Por el otro:
+x : (y:xs) =     {:}
+(x:y:ys)
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```
+### IV. `∀xs::[a]. ∀f::(a->b). length (map f xs) = length xs`  
+Por extensionalidad funcional e induccion estructural en xs tenemos dos casos: Base e inductivo...  
+Predicado unario: `P(xs) = ∀f::(a->b). length (map f xs) = length xs`  
+**Caso base:** `P([])`  
+```
+No escribo el "∀f::(a->b)" pero saber que esta presente.
+
+length (map f []) = length []
+length (map f []) = length []     {M0;L0}
+length [] = 0     {L0}
+0 = 0
+
+P([]) vale.
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+* **P(xs)**: `∀f::(a->b). length (map f xs) = length xs` {HI}  
+* **P(x:xs)**: `∀f::(a->b). length (map f (x:xs)) = length (x:xs)` {TI}
+```
+No escribo el "∀f::(a->b)" pero saber que esta presente.
+
+Por un lado:
+length (map f (x:xs)) =     {M0}
+length (f x : map f xs) =     {L1}
+1 + length (map f xs) =     {HI}
+1 + length xs
+
+Por el otro:
+length (x:xs) =     {L1}
+1 + length xs
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
