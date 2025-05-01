@@ -1,2 +1,2 @@
 DUDAS.  
-Ejercicio x -> i.  
+Ejercicio 2 -> vi (renombrar p(y:xs)).  
