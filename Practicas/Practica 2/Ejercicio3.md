@@ -1,3 +1,34 @@
+### V. ``  
+Por extensionalidad funcional e induccion estructural en xs tenemos dos casos: Base e inductivo...  
+Predicado unario: `P(xs) = `  
+**Caso base:** `P([])`  
+```
+No escribo el "" pero saber que esta presente.
+
+
+
+P([]) vale.
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+* **P(xs)**: `` {HI}  
+* **P(x:xs)**: `` {TI}
+```
+No escribo el "" pero saber que esta presente.
+
+Por un lado:
+
+Por el otro:
+
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```  
+
+
+
+
+
+
 # Practica 2 / Ejercicio 3 
 ## Considerar las siguientes funciones y demostrar las siguientes propiedades:
 ```
@@ -23,6 +54,12 @@
 {FL0}: foldl _ z [] = z
 {FL1}: foldl f z (x:xs) = foldl f (f z x) xs
 {FLIP}: flip f x y = f y x
+           filter :: (a -> Bool) -> [a] -> [a]
+{FILTER0}: filter p [] = []
+{FILTER1}: filter p (x:xs) = if p x then x : filter p xs else filter p xs
+      elem :: a -> [a] -> Bool
+{E0}: elem e [] = false
+{E1}: elem e (x:xs) = e == x || elem e xs
 ```
 ### I. `∀xs::[a]. length (duplicar xs) = 2 * length xs`  
 Por extencionalidad funcional e induccion estructural tenemos dos casos: Base e inductivo...  
@@ -114,7 +151,7 @@ x:[] =     {:}
 
 P([]) vale.
 ```
-**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(y:xs) {TI}`  
 Donde:  
 * **P(xs)**: `∀x::a. append [x] xs = x:xs` {HI}  
 * **P(y:xs)**: `∀x::a. append [x] (y:xs) = x : (y:xs)` {TI}
@@ -166,3 +203,87 @@ length (x:xs) =     {L1}
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
+### V. `∀xs::[a]. ∀p::a->Bool. ∀e::a. ((elem e (filter p xs)) ⇒ (elem e xs)) (asumiendo Eq a)`  
+Por extensionalidad funcional e induccion estructural en xs tenemos dos casos: Base e inductivo...  
+Predicado unario: `P(xs) = ∀p::a->Bool. ∀e::a. ((elem e (filter p xs)) ⇒ (elem e xs)) (asumiendo Eq a)`  
+**Caso base:** `P([])`  
+```
+No escribo el "∀p::a->Bool. ∀e::a." pero saber que esta presente.
+
+Por el antecedente de la implicación:
+((elem e (filter p [])) =     {FILTER0}
+(elem e []) =     {E0}
+false
+
+Como: false ⇒ Q ≡ true 
+P([]) vale.
+
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde (asumiendo Eq a):  
+* **P(xs)**: `∀p::a->Bool. ∀e::a. ((elem e (filter p xs)) ⇒ (elem e xs))` {HI}  
+* **P(x:xs)**: `∀p::a->Bool. ∀e::a. ((elem e (filter p (x:xs))) ⇒ (elem e (x:xs)))` {TI}
+```
+No escribo el "∀p::a->Bool. ∀e::a." pero saber que esta presente.
+Sea ((elem e (filter p (x:xs))) ⇒ (elem e (x:xs)))
+
+Analizamos el antecedente de la implicación:
+((elem e (filter p (x:xs))) =     {FILTER1}
+(elem e (if p x then x : filter p xs else filter p xs))
+
+Por extensionalidad de Bool tengo dos casos para (p x)
+{1a} p x = true
+     {BOOL; IF}
+     (elem e (x : filter p xs)) =     {E1}
+     (e==x || elem e (filter p xs))
+
+     Por extensionalidad de Bool tengo dos casos para (e==x)
+     {1b} (e==x) = true
+               {BOOL; ||}
+               true ==> como (e==x) la implicación nos queda: true ⇒ true ≡ true
+     {2b} (e==x) = false
+               {BOOL; ||}
+               elem e (filter p xs) =     {HI}
+               (elem e (filter p xs)) ⇒ (elem e xs) ==> Obtengo la misma implicación por {HI}
+{2a} p x = false
+     {BOOL; IF}
+     (elem e (filter p xs)) =     {HI}
+     (elem e (filter p xs)) ⇒ (elem e xs)) ==> Obtengo la misma implicación por {HI}
+
+∴vale P(x:xs) y se prueba la propiedad.
+```
+### VI. `∀xs::[a]. ∀x::a. ponerAlFinal x xs = xs ++ (x:[])`  
+Por extensionalidad funcional e induccion estructural en xs tenemos dos casos: Base e inductivo...  
+Predicado unario: `P(xs) = ∀x::a. ponerAlFinal x xs = xs ++ (x:[])`  
+**Caso base:** `P([])`  
+```
+No escribo el "∀x::a." pero saber que esta presente.
+
+Por un lado:
+ponerAlFinal x [] =     {P0}
+foldr (:) (x:[]) [] =     {F0}
+(x:[]) =     {:}
+[x]
+
+Por el otro:
+[] ++ (x:[]) =     {++}
+(x:[]) =     {:}
+[x]
+
+
+P([]) vale.
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(y:xs) {TI}`  
+Donde:  
+* **P(xs)**: `∀x::a. ponerAlFinal x xs = xs ++ (x:[])` {HI}  
+* **P(y:xs)**: `∀x::a. ponerAlFinal x (y:xs) = (y:xs) ++ (x:[])` {TI}
+```
+No escribo el "∀x::a." pero saber que esta presente.
+
+Por un lado:
+
+Por el otro:
+
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+``` 
