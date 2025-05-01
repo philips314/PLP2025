@@ -30,7 +30,7 @@ asociarD ((x, y), z) = (x, (y, z))  {AD}
 ```  
 ### III. `∀p::Either a b. espejar (espejar p) = p`  
 ```
-Por principio de inducción sobre Either y su respectivo lema de generación, basta con probar estos dos casos:
+Por el lema de generación de la suma, tenemos que:
 ∀p::Either a b. espejar (espejar p) = p -> o bien ∃x::a. e = Left x o ∃y::b. e = Right x
 
 Caso p = Left x
