@@ -2,7 +2,7 @@
 Dado el conjunto de valores visto en clase: `V := λx: τ. M | true | false | zero | succ(V)`
 Determinar si cada una de las siguientes expresiones es o no un valor:
 ## a. (λx: Bool. x) true
-Es una `aplicación` que reduce al valor `true`, pero no lo es.
+Es una `aplicación` que reduce al valor `true`, pero no es un valor.
 ## b. λx: Bool. 2  
 Si, es una `abstracción`
 ## c. λx: Bool. pred(2)  
