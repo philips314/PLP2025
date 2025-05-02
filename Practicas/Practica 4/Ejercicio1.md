@@ -7,7 +7,6 @@ Donde la letra x representa un nombre de variable arbitrario. Dichos nombres se 
 infinito numerable dado X = {w, w1, w2, . . . , x, x1, x2, . . . , y, y1, y2, . . . , z, z1, z2, . . . }
 Tipos
 τ ::= Bool | Nat | τ → τ
-$\checkmark$ $\times$ 
 ```
 ## a. x  
 $\checkmark$ Es un término.
