@@ -2,7 +2,7 @@
 Determinar qué tipos representan $\sigma$ y $\tau$ en cada uno de los siguientes juicios de tipado. Si hay más de una solución, o si no hay ninguna, indicarlo.
 ## a. x: σ ⊢ isZero(succ(x)) : τ  
 ```
--> SOlO tipa si σ = Nat y τ = Bool
+SOlO tipa si σ := Nat y τ := Bool
 
 x: σ ⊢ x: Nat
 ----------------------- t-SUCC
@@ -24,21 +24,21 @@ x:σ ⊢ x:σ                           y:Bool ⊢ zero: σ  (*)
 ```
 ## c. y: τ ⊢ if (λx: σ. x) then y else succ(zero) : σ
 ```
-No tipa pues, (λx: σ. x) deberia ser de tipo μ → Bool.
+No tipa pues, (λx: σ. x) deberia ser de tipo σ → (...).
 
-                                                      ------------------ ax0
-NO TIPA                        τ=σ                     y: τ ⊢ zero: Nat
------------------------       -------------- t-VAR    -------------------------
+                                                         σ := Nat
+                                                       ------------------ t-0
+NO TIPA                        τ := σ                   y: τ ⊢ zero: Nat
+-----------------------       -------------- t-VAR    ------------------------- t-succ
 y: τ ⊢ (λx: σ. x): Bool       y: τ ⊢ y: σ             y: τ ⊢ succ(zero) : σ
 ------------------------------------------------------------------------------ t-IF
 y: τ ⊢ if (λx: σ. x) then y else succ(zero) : σ
 ```
 ## d. x: σ ⊢ x y : τ
 ```
-Tipa si y solo si σ := μ → τ 
 
-σ = μ → τ                    σ = μ 
----------------- t-VAR      ---------------- t-VAR
+σ := μ → τ                   No se nada sobre y -> NO TIPA
+---------------- t-VAR      ------------------------------- 
 x: σ ⊢ x: μ → τ              x: σ ⊢ y : μ
 ----------------------------------------------- t-APP
 x: σ ⊢ x y : τ
@@ -46,7 +46,6 @@ x: σ ⊢ x y : τ
 ## e. x: σ, y: τ ⊢ x y : τ
 ```
 Tipa si y solo si σ := μ → μ
-
 
 σ := μ → τ                            τ := μ
 --------------------- t-VAR          ------------------ t-VAR
