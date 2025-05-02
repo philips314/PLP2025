@@ -11,5 +11,5 @@ Si, es una `abstracción`
 Si, es una `abstracción`
 ## e. x 
 No, no es un valor.
-## f. succ(succ(zero))  
+## f. succ(succ(zero))  ?
 No, ya que puede reducir a `2`
