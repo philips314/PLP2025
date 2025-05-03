@@ -1,34 +1,3 @@
-### V. ``  
-Por extensionalidad funcional e induccion estructural en xs tenemos dos casos: Base e inductivo...  
-Predicado unario: `P(xs) = `  
-**Caso base:** `P([])`  
-```
-No escribo el "" pero saber que esta presente.
-
-
-
-P([]) vale.
-```
-**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
-Donde:  
-* **P(xs)**: `` {HI}  
-* **P(x:xs)**: `` {TI}
-```
-No escribo el "" pero saber que esta presente.
-
-Por un lado:
-
-Por el otro:
-
-
-Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
-```  
-
-
-
-
-
-
 # Practica 2 / Ejercicio 3 
 ## Considerar las siguientes funciones y demostrar las siguientes propiedades:
 ```
@@ -322,7 +291,8 @@ reverse (y:ys) =     {R0}
 foldl (flip (:)) [] (y:ys) =     {FL1}
 foldl (flip (:)) ((flip (:)) [] y) ys =     {FLIP}
 foldl (flip (:)) ((:) y []) ys =     {:}
-foldl (flip (:)) ([y]) ys
+foldl (flip (:)) ([y]) ys =     {LEMA}
+reverse ys ++ [y]
 
 Por el otro:
 foldr (\x rec -> rec ++ (x:[])) [] (y:ys) =     {FR1}
@@ -331,7 +301,7 @@ foldr (\x rec -> rec ++ (x:[])) [] (y:ys) =     {FR1}
 (foldr \x' rec -> rec ++ [x']) [] ys) ++ ([y]) =     {HI; recordar que y es el primer elemento de la lista y x' es el segundo}
 reverse ys ++ [y]
 
-Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(y:ys) y se prueba la propiedad.
 ```  
 Tengo que definir un LEMA.  
 ∀xs::[a]. P(xs): ` ∀y::a. foldl (flip (:)) [y] xs = reverse xs ++ [y]`  
@@ -354,5 +324,46 @@ Donde ∀xs::[a]. Tengo:
 * **P(xs)**: `∀y::a. foldl (flip (:)) [y] xs = reverse xs ++ [y]` {HI}  
 * **P(x:xs)**: `∀y::a. foldl (flip (:)) [y] (x:xs) = reverse (x:xs) ++ [y]` {TI}
 ```
-asd
+Por un lado:
+foldl (flip (:)) [y] (x:xs) =     {FL1}
+foldl (flip (:)) ((flip (:)) [y] x) xs =     {FLIP}
+foldl (flip (:)) ((:) x [y]) xs =     {:}
+foldl (flip (:)) [x,y] xs =     {HI}
+reverse xs ++ [x,y] 
+
+Por el otro:
+reverse (x:xs) ++ [y] =     {R0}
+(foldl (flip (:)) [] (x:xs)) ++ [y] =     {FL1}
+foldl (flip (:)) ((flip (:)) [] x) xs ++ [y] =     {FLIP}
+foldl (flip (:)) ((:) x []) xs ++ [y] =     {:}
+foldl (flip (:)) [x] xs ++ [y] =     {HI}
+reverse xs ++ [x] ++ [y] =     {++}
+reverse xs ++ [x,y]
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```
+### VIII. `∀xs::[a]. ∀ x::a. head (reverse (ponerAlFinal x xs)) = x ??`    
+Por extensionalidad funcional e induccion estructural en xs tenemos dos casos: Base e inductivo...  
+Predicado unario: `P(xs) = `  
+**Caso base:** `P([])`  
+```
+No escribo el "" pero saber que esta presente.
+
+
+
+P([]) vale.
+```
+**Caso inductivo:** `∀xs::[a]. ∀ x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde:  
+* **P(xs)**: `` {HI}  
+* **P(x:xs)**: `` {TI}
+```
+No escribo el "" pero saber que esta presente.
+
+Por un lado:
+
+Por el otro:
+
+
+Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
+```  
