@@ -318,22 +318,41 @@ Donde:
 * **P(y:ys)**: `reverse (y:ys) = foldr (\x rec -> rec ++ (x:[])) [] (y:ys)` {TI}
 ```
 Por un lado:
+reverse (y:ys) =     {R0}
+foldl (flip (:)) [] (y:ys) =     {FL1}
+foldl (flip (:)) ((flip (:)) [] y) ys =     {FLIP}
+foldl (flip (:)) ((:) y []) ys =     {:}
+foldl (flip (:)) ([y]) ys
 
 Por el otro:
-
+foldr (\x rec -> rec ++ (x:[])) [] (y:ys) =     {FR1}
+(\x rec -> rec ++ (x:[])) y (foldr \x' rec -> rec ++ (x':[])) [] ys) =     {B; donde x=y}
+((foldr \x' rec -> rec ++ (x':[])) [] ys) ++ (y:[]) =     {:}
+(foldr \x' rec -> rec ++ [x']) [] ys) ++ ([y]) =     {HI; recordar que y es el primer elemento de la lista y x' es el segundo}
+reverse ys ++ [y]
 
 Llegamos a lo mismo de ambos lados del igual. ∴vale P(x:xs) y se prueba la propiedad.
 ```  
 Tengo que definir un LEMA.  
-P(xs): `∀xs::[a]. ∀y::a. foldl (flip (:)) [y] xs = reverse xs ++ [y]`  
+∀xs::[a]. P(xs): ` ∀y::a. foldl (flip (:)) [y] xs = reverse xs ++ [y]`  
 **Caso base:** `P([])`  
 ```
-asd
+Por un lado:
+foldl (flip (:)) [y] [] =     {FL0}
+[y]
+
+Por el otro:
+reverse [] ++ [y] =     {R0}
+foldl (flip (:)) [] [] ++ [y] =     {FL0}
+[] ++ [y] =     {++}
+[y]
+
+P([]) vale.
 ```
-**Caso inductivo:** `asd`  
-Donde:  
-* **P(ys)**: `asd` {HI}  
-* **P(y:ys)**: `asd` {TI}
+**Caso inductivo:** `∀xs::[a]. ∀x::a. P(xs) {HI} => P(x:xs) {TI}`  
+Donde ∀xs::[a]. Tengo:  
+* **P(xs)**: `∀y::a. foldl (flip (:)) [y] xs = reverse xs ++ [y]` {HI}  
+* **P(x:xs)**: `∀y::a. foldl (flip (:)) [y] (x:xs) = reverse (x:xs) ++ [y]` {TI}
 ```
 asd
 ```
