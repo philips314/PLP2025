@@ -68,7 +68,7 @@ asd
 x: Nat ⊢ x: Nat              x: Nat ⊢ True: Bool
 ----------------------------------------------------- t-PAR
 x: Nat ⊢ <x, True>: Nat x Bool
------------------------------------------- t-ABS          ------------ax0
+------------------------------------------ t-ABS          ------------ t-0
 ∅ ⊢ λx: Nat. <x, True>: Nat → Nat x Bool                  ∅ ⊢ 0: Nat
 ------------------------------------------------------------------------- T-APP
 ∅ ⊢ (λx: Nat. <x, True>) 0: Nat x Bool
@@ -77,7 +77,7 @@ x: Nat ⊢ <x, True>: Nat x Bool
 ```
 ## Extra. Reducir π1((λx: Nat. <x, True>) 0) a un valor.  
 ```
-π1((λx: Nat. <x, True>) 0) → π1(<0, True>) → 0     {B,cm-π1}
+π1((λx: Nat. <x, True>) 0) → {B; cg-π1} π1(<0, True>) → {cm-π1} 0   
 ```
 
  
