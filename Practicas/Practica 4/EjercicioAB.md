@@ -69,6 +69,14 @@ Regla de congruencia (Solo para el M, no debo hacerlo ni para el N, ni el O)
                                     M --> M'
 ---------------------------------------------------------------------------------- cg-case    
 Case M of Nil -> N; Bin(i,r,d) -> O  ----->  Case M' of Nil -> N; Bin(i,r,d) -> O
-
-
+```
+## e. Reducir el siguiente término.  
+`case (if ((λx:Bool.x) true) then Bin(Nil_{Nat},1,Nil_{Nat}) else Nil_{Nat}) of Nil -> false; Bin(i,r,d) -> isZero(r)`
+```
+case (if ((λx:Bool.x) true) then Bin(Nil_{Nat},1,Nil_{Nat}) else Nil_{Nat}) of Nil -> false; Bin(i,r,d) -> isZero(r) ----> {cg-case ; cg-if ; β (por la lambda que toma el true)}
+case (if true then Bin(Nil_{Nat},1,Nil_{Nat}) else Nil_{Nat}) of Nil -> false; Bin(i,r,d) -> isZero(r) -------> {cg-case ; cm-if}
+case Bin(Nil_{Nat},1,Nil_{Nat}) of Nil -> false; Bin(i,r,d) -> isZero(r) -------->  {cm-cBin}
+isZero(r){i := Nil_{Nat}, r := 1, d := Nil_{Nat}} ---------> {SUST}
+isZero(1) -----> {cm-isZero}
+false
 ```
