@@ -47,8 +47,11 @@ V ::= . . . | <M, M>
 cg es congruencia (reducción) y cm es computo (evaluación).
 Observo que en algunas partes escribo V1 o V2 para no romper el determinismo, lo
 que significaria que en un mismo caso puedo hacer dos cosas diferentes.
-Ej: sea π1(<V1,M>) -> V1 significaria que puedo reducir M o computar π1. Además,
-    estaria reduciendo algo que despues descarto por la def de π1.
+{cm-π1}: sea π1(<V1,M>) -> V1 significaria que puedo reducir M o computar π1. Además,
+         estaria reduciendo algo que despues descarto por la def de π1.
+{cg-p2}: Si fuera V1 no fuera un valor, significa que podria reducir el primer componente
+         o el segundo (rompe el determinismo). Solo puedo reducir el segundo si ya reducí
+         al primer componente.
 
     M → M'                         N → N'
 ----------------- cg-p1       -------------------- cg-p2
