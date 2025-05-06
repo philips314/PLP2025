@@ -58,9 +58,17 @@ Reglas de computo...
 Case Nilσ of Nil -> N; Bin(i,r,d) -> O ----> N  {cm-cNil}
 Case Bin(V1,V2,V3) of Nil -> N; Bin(i,r,d) -> O ----> O{i := V1, r := V2, d := V3}  {cm-cBin}
 
-Reglas de tipado...
+Regla de tipado...
 
- Γ ⊢ M : ABσ      Γ ⊢ O : τ   Γ ⊢ N : τ
------------------------------------------------ t-raiz       -------------------- t-π2
+ Γ ⊢ M : ABσ    Γ ⊢ N : τ     Γ, i:ABσ, r:σ, d:ABσ ⊢ O : τ
+------------------------------------------------------------- t-case    
  Γ ⊢ Case M of Nil -> N; Bin(i,r,d) -> O : τ
+
+Regla de congruencia (Solo para el M, no debo hacerlo ni para el N, ni el O)
+
+                                    M --> M'
+---------------------------------------------------------------------------------- cg-case    
+Case M of Nil -> N; Bin(i,r,d) -> O  ----->  Case M' of Nil -> N; Bin(i,r,d) -> O
+
+
 ```
