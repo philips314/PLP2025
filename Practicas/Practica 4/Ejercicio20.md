@@ -45,7 +45,10 @@ V ::= . . . | <M, M>
 ## d. Definir reglas de semántica operacional manteniendo el determinismo y la preservación de tipos. Importante: no olvidar las reglas de congruencia.  
 ```
 cg es congruencia (reducción) y cm es computo (evaluación).
-Observo que en algunas partes escribo V1 o V2 para no romper el determinismo. 
+Observo que en algunas partes escribo V1 o V2 para no romper el determinismo, lo
+que significaria que en un mismo caso puedo hacer dos cosas diferentes.
+Ej: sea π1(<V1,M>) -> V1 significaria que puedo reducir M o computar π1. Además,
+    estaria reduciendo algo que despues descarto por la def de π1.
 
     M → M'                         N → N'
 ----------------- cg-p1       -------------------- cg-p2
