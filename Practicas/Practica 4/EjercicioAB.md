@@ -80,3 +80,39 @@ isZero(r){i := Nil_{Nat}, r := 1, d := Nil_{Nat}} =  {SUST (no es una reducción
 isZero(1) -----> {cm-isZero}
 false
 ```
+## f. Definir observadores con case.
+```
+⟂_{σ} := fix λx:σ.x (INDEFINIDO DE TIPO SIGMA)
+raiz_{σ} := λx:AB_{σ}. case x of Nil -> ⟂_{σ}; Bin(i,r,d) -> r
+der_{σ} :=  λx:AB_{σ}. case x of Nil -> ⟂_{σ}; Bin(i,r,d) -> d
+izq_{σ} := λx:AB_{σ}. case x of Nil -> ⟂_{σ}; Bin(i,r,d) -> i
+esNil_{σ} := λx:AB_{σ}. case x of Nil -> True; Bin(i,r,d) -> False
+```
+## g. Extender considerando nuevo término: `M ::= ... | map(M,N)`
+```
+Considerar:
+map(λx:Nat.isZero(x), Bin(Nil_{Nat}, 1, Nil_{Nat})) ---->^{+}
+Bin(Nil_{Bool}, False, Nil_{Bool})
+
+Regla de tipado:
+
+ Γ ⊢ M:ABσ -> ABτ    Γ ⊢ N:ABσ   
+-------------------------------- t-map  
+      Γ ⊢ map(M,N) : ABτ            
+
+El conjunto de valores no cambia porque se trata de una operación (se puede computar/reducir a un valor).
+
+Reglas de congruencia: 
+
+          M -----> M'                          M -----> M'
+---------------------------- cg-map1   ----------------------------- cg-map2  
+  map(M,N) --->  map(M',N)              map(V1,M) --->  map(V1,M')
+
+Reglas de computo:
+
+map(V, Bin(V1, V2, V3)) ----> Bin (map(V,V1), V V2, map(V,V3))  {cm-mB}
+
+           Γ ⊢ V : σ -> τ
+------------------------------------- {cm-mB}
+     map(V, Nil_{σ}) ----> Nil_{τ}   
+```
