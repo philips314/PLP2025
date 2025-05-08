@@ -1,4 +1,5 @@
-# Practica 4 / Ejercicio 22.  
+# Practica 4  
+## Ejercicio 22.  
 Este ejercicio extiende el Cálculo Lambda tipado con listas.  
 Comenzamos ampliando el conjunto de tipos:  
 τ ::= . . . | [τ]  
@@ -93,3 +94,73 @@ case V1::V2 of {[] -> N | h :: t -> O} ----->  O{h := V1, t := V2}  {cm-cTail}
 foldr [] base ⇝ N; rec(h, r) ⇝ O ----------> N  {cm-fBase}
 foldr V1::V2 base ⇝ N; rec(h, r) ⇝ O ----------> O{h := V1, r := foldr V2 base ⇝ N; rec(h', r') ⇝ O}  {cm-fTail}
 ```
+## Ejercicio 23  
+A partir de la extensión del ejercicio 22, definir una nueva extensión que incorpore expresiones de la forma map(M, N), donde N es una lista y M una función que se aplicará a cada uno de los elementos de N.  
+Importante: tener en cuenta las anotaciones de tipos al denir las reglas de tipado y semántica.  
+Extensión del conjunto de términos.  
+```
+Observo que no es necesario extender el conjunto de tipos ni el de valores.
+M, N, O ::= . . . | map(M,M)
+```
+Reglas de tipado.  
+```
+ Γ ⊢ M: σ -> τ      Γ ⊢ N:[σ]     
+---------------------------------- t-map
+ Γ ⊢ map(M:N) : [τ]
+```
+Reglas de semantica operacional.
+```
+Reglas de congruencia:
+
+          M -----> M'                         
+---------------------------- cg-map1  
+  map(M,N) --->  map(M',N)
+
+        M -----> M'
+------------------------------ cg-map2  
+  map(V1,M) --->  map(V1,M')
+
+Reglas de computo:
+
+map(V, []_{σ}) -----> Nil_{τ}  {cg-m[]}
+map(V, V1::V2) -----> V V1 :: (map(V,V2))  {cg-mTail}
+```
+## Ejercicio 24  
+A partir de la extensión del ejercicio 22, agregaremos términos para representar listas por comprensión, con un selector y una guarda, de la siguiente manera: `[M | x ← S, P]`   
+donde:  
+* x es el nombre de una variable que puede aparecer libre en los términos M y P.
+* para cada valor de la lista representada por el término S, se sustituye x en P y, de resultar verdadero, se agrega M con x sustituido al resultado.
+
+Tener en cuenta: `[ expresión | generadores, filtros ]`
+* las expresiones son de tipo σ
+* Los generadores toman una variable de tipo τ que salen de una lista de tipo [τ]
+* los filtros son un Bool que se evalua sustituyendo x:τ
+* Resulta en una lista de tipo [σ]
+
+
+Definir las reglas de tipado, el conjunto de valores y las reglas de semántica para esta extensión.  
+Extensión del conjunto de términos.  
+```
+Observo que no es necesario extender el conjunto de tipos ni el de valores.
+M, N, O ::= . . . | [M | x ← S, P]
+```
+Reglas de tipado.  
+```
+ Γ, x:τ ⊢ P: Bool     Γ ⊢ S:[τ]       Γ, x:τ ⊢ M : σ
+----------------------------------------------------------- t-comp
+ Γ ⊢ [M | x ← S, P] : [σ]
+```
+
+Reglas de semantica operacional.
+```
+Reglas de congruencia:
+
+
+Reglas de computo:
+[M | x ← []τ, P] ------> []σ  {cm-comp[]}
+
+    P{x := V1}
+--------------------------------------------------
+[M | x ← V1::V2, P] ---------> 
+```
+
