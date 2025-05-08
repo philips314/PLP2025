@@ -17,15 +17,24 @@ Por ejemplo:
 ```
 ## b. Agregar reglas de tipado para las nuevas expresiones.  
 ```
-                       Γ ⊢ M:τ  Γ ⊢ N:[τ]                Γ ⊢ M:[τ]      Γ ⊢ M:[τ]
--------------- t-[]   ---------------------- t-x:xs     ------------------------------------------------------------
+                       Γ ⊢ M:τ  Γ ⊢ N:[τ]                Γ ⊢ M:[τ]      Γ ⊢ N:p     Γ,h:τ, t:[τ] ⊢ O:p
+-------------- t-[]   ---------------------- t-tail     -------------------------------------------------- t-case
 Γ ⊢ []τ : [τ]          Γ ⊢ M::N : [τ]                    case M of {[] -> N | h :: t -> O} : p
+
+ Γ ⊢ M:[τ]    Γ ⊢ N:p     Γ, h:τ, r:p ⊢ O:p 
+---------------------------------------------- t-foldr
+ Γ ⊢ foldr M base -> N; rec(h, r) -> O : p
+
+FOLDR:
+M es una lista de elementos de tipo τ
+N es el caso base, de tipo p
+O es el caso recursivo, donde h es el "head" y r el resultado de la recursión
 ```
 ## c. Demostrar el siguiente juicio de tipado (recomendación: marcar variables libres y ligadas en el término antes de comenzar).  
 ### x : Bool, y : [Bool] ⊢ foldr x :: x :: y base $\leadsto$ y; rec(y, x) $\leadsto$ if y then x else $[ ]_{Bool}$ : [Bool]  
 ```
 ```
-## d. Mostrar cómo se extiende el conjunto de valores. Estos deben reejar la forma de las listas que un programa podría devolver.  
+## d. Mostrar cómo se extiende el conjunto de valores. Estos deben reflejar la forma de las listas que un programa podría devolver.  
 ```
 ```
 ## e. Agregar los axiomas y reglas de reducción asociados a las nuevas expresiones.  
