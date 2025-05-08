@@ -18,13 +18,21 @@ Hecho en papel...
 ```
 ## b. Agregar reglas de tipado para las nuevas expresiones.  
 ```
-                       Γ ⊢ M:τ  Γ ⊢ N:[τ]                Γ ⊢ M:[τ]      Γ ⊢ N:p     Γ,h:τ, t:[τ] ⊢ O:p
--------------- t-[]   ---------------------- t-tail     -------------------------------------------------- t-case
-Γ ⊢ []τ : [τ]          Γ ⊢ M::N : [τ]                    case M of {[] -> N | h :: t -> O} : p
+                              
+-------------- t-[]        
+Γ ⊢ []τ : [τ]     
+
+ Γ ⊢ M:τ  Γ ⊢ N:[τ]        
+---------------------- t-tail
+ Γ ⊢ M::N : [τ]                   
+
+ Γ ⊢ M:[τ]      Γ ⊢ N:p     Γ,h:τ, t:[τ] ⊢ O:p
+-------------------------------------------------- t-case
+case M of {[] -> N | h :: t -> O} : p
 
  Γ ⊢ M:[τ]    Γ ⊢ N:p     Γ, h:τ, r:p ⊢ O:p 
 ---------------------------------------------- t-foldr
- Γ ⊢ foldr M base -> N; rec(h, r) -> O : p
+ Γ ⊢ foldr M base ⇝ N; rec(h, r) ⇝ O : p
 
 FOLDR:
 M es una lista de elementos de tipo τ
@@ -64,6 +72,24 @@ V ::= ... | []τ | V :: V
 ## e. Agregar los axiomas y reglas de reducción asociados a las nuevas expresiones.  
 ```
 Reglas de congruencia:
+* El cg-tail solo con head porque si no rompe el determinismo.
+* En cg-tail N es un valor V
+
+    M-->M'     
+------------------ cg-tail
+ M::V ---> M'::V
+
+                                M-->M'
+----------------------------------------------------------------------------- cg-case
+case M of {[] -> N | h :: t -> O} ---->  case M' of {[] -> N | h :: t -> O}
+
+                                M-->M'
+----------------------------------------------------------------------------- cg-foldr
+foldr M base ⇝ V1; rec(h, r) ⇝ V2 ------>  foldr M base ⇝ V1; rec(h, r) ⇝ V2 
 
 Reglas de computo:
+case [] of {[] -> N | h :: t -> O} ----->  N  {cm-c[]}
+case V1::V2 of {[] -> N | h :: t -> O} ----->  O{h := V1, t := V2}  {cm-cTail}
+foldr [] base ⇝ N; rec(h, r) ⇝ O ----------> N  {cm-fBase}
+foldr V1::V2 base ⇝ N; rec(h, r) ⇝ O ----------> O{h := V1, r := foldr V2 base ⇝ N; rec(h', r') ⇝ O}  {cm-fTail}
 ```
