@@ -33,6 +33,28 @@ O es el caso recursivo, donde h es el "head" y r el resultado de la recursión
 ## c. Demostrar el siguiente juicio de tipado (recomendación: marcar variables libres y ligadas en el término antes de comenzar).  
 ### x : Bool, y : [Bool] ⊢ foldr x :: x :: y base $\leadsto$ y; rec(y, x) $\leadsto$ if y then x else $[ ]_{Bool}$ : [Bool]  
 ```
+                                        -------------------------------- t-var   -------------------------------- t-var
+                                        x : Bool, y : [Bool] ⊢ x : Bool          x : Bool, y : [Bool] ⊢ y : [Bool]
+-------------------------------- t-var  --------------------------------------------------------------------------- t-tail
+x : Bool, y : [Bool] ⊢ x : Bool         x : Bool, y : [Bool] ⊢ x :: y : [Bool]
+------------------------------------------------------------------------------- t-tail               (*)                                                            (+)
+x : Bool, y : [Bool] ⊢ x :: x :: y :: [Bool]                                             x : Bool, y : [Bool] ⊢ y : [Bool]      x : Bool, y : [Bool], y':Bool, x:[Bool] ⊢ if y' then x' else []_{Bool} : [Bool]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- t-foldr
+x : Bool, y : [Bool] ⊢ foldr x :: x :: y base -> y; rec(y', x') -> if y' then x' else []_{Bool} : [Bool]
+
+
+(*):
+--------------------------------- t-var
+x : Bool, y : [Bool] ⊢ y : [Bool]
+
+
+
+(+):
+---------------------------------------------------- t-var    ------------------------------------------------------- t-var     ------------------------------------------------------- t-[]
+x : Bool, y : [Bool], y':Bool, x':[Bool] ⊢ y' : Bool           x : Bool, y : [Bool], y':Bool, x':[Bool] ⊢ x' : [Bool]           x : Bool, y : [Bool], y':Bool, x':[Bool] ⊢ []_{Bool} : [Bool]
+------------------------------------------------------------------------------------------------------- t-if
+x : Bool, y : [Bool], y':Bool, x':[Bool] ⊢ if y' then x' else []_{Bool} : [Bool]
+
 ```
 ## d. Mostrar cómo se extiende el conjunto de valores. Estos deben reflejar la forma de las listas que un programa podría devolver.  
 ```
