@@ -96,7 +96,7 @@ foldr V1::V2 base ⇝ N; rec(h, r) ⇝ O ----------> O{h := V1, r := foldr V2 ba
 ```
 ## Ejercicio 23  
 A partir de la extensión del ejercicio 22, definir una nueva extensión que incorpore expresiones de la forma map(M, N), donde N es una lista y M una función que se aplicará a cada uno de los elementos de N.  
-Importante: tener en cuenta las anotaciones de tipos al denir las reglas de tipado y semántica.  
+Importante: tener en cuenta las anotaciones de tipos al definir las reglas de tipado y semántica.  
 Extensión del conjunto de términos.  
 ```
 Observo que no es necesario extender el conjunto de tipos ni el de valores.
