@@ -153,14 +153,16 @@ Reglas de tipado.
 
 Reglas de semantica operacional.
 ```
-Reglas de congruencia:
-
-
 Reglas de computo:
-[M | x ← []τ, P] ------> []σ  {cm-comp[]}
+[M | x ← []τ, P] ------> []σ  {cm-Comp[]}
+[M | x ← V1 :: V2, P] → M{x := V1} :: [M | x ← V2, P]     si P{x := V1} = true   {cm-CompTrue}
+[M | x ← V1 :: V2, P] → [M | x ← V2, P]                   si P{x := V1} = false  {cm-CompFalse}
 
-    P{x := V1}
---------------------------------------------------
-[M | x ← V1::V2, P] ---------> 
+Reglas de congruencia
+                S ----> S'
+-------------------------------------------- cg-Comp
+[M | x ← S, P] ---------> [M | x ← S', P]
+
+
 ```
 
