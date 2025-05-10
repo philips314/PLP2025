@@ -73,12 +73,14 @@ V ::= ... | []τ | V :: V
 ## e. Agregar los axiomas y reglas de reducción asociados a las nuevas expresiones.  
 ```
 Reglas de congruencia:
-* El cg-tail solo con head porque si no rompe el determinismo.
-* En cg-tail N es un valor V
+
+    M-->M'     
+------------------ cg-head
+ M::N ---> M'::N
 
     M-->M'     
 ------------------ cg-tail
- M::V ---> M'::V
+ V::M ---> V::M'
 
                                 M-->M'
 ----------------------------------------------------------------------------- cg-case
@@ -86,7 +88,7 @@ case M of {[] -> N | h :: t -> O} ---->  case M' of {[] -> N | h :: t -> O}
 
                                 M-->M'
 ----------------------------------------------------------------------------- cg-foldr
-foldr M base ⇝ V1; rec(h, r) ⇝ V2 ------>  foldr M base ⇝ V1; rec(h, r) ⇝ V2 
+foldr M base ⇝ V1; rec(h, r) ⇝ V2 ------>  foldr M' base ⇝ V1; rec(h, r) ⇝ V2 
 
 Reglas de computo:
 case [] of {[] -> N | h :: t -> O} ----->  N  {cm-c[]}
