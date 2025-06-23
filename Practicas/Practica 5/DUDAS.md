@@ -1,2 +1,2 @@
 DUDAS.  
-Ejercicio x -> i.
+Ejercicio 1 -> iii.
